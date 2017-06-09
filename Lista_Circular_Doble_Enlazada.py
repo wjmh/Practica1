@@ -35,8 +35,9 @@ class ListaCircular:
         self.__UnirNodos()
 
     def __UnirNodos(self):
-        self.primero.anterior = self.ultimo
-        self.ultimo.siguiente = self.primero
+        if(self.primero != None):
+            self.primero.anterior = self.ultimo
+            self.ultimo.siguiente = self.primero
 
     def recorrerInicia_a_Fin(self):
         aux = self.primero
@@ -55,3 +56,44 @@ class ListaCircular:
             aux = aux.anterior
             if(aux == self.ultimo):
                 break
+
+    def EliminarInicio(self):
+        if (self.Vacio()):
+            print("La lista está vacía.")
+
+        elif (self.primero == self.ultimo):
+            self.primero = self.ultimo = None
+
+        else:
+            self.primero = self.primero.siguiente
+
+        self.__UnirNodos()
+
+
+
+    def EliminarUltimo(self):
+        if (self.Vacio()):
+            print("La lista está vacía.")
+
+        elif (self.primero == self.ultimo):
+            self.primero = self.ultimo = None
+
+        else:
+            self.ultimo = self.ultimo.anterior
+
+        self.__UnirNodos()
+
+
+    def Buscar(self, user, password):
+        aux = self.primero
+        while(aux):
+            if (aux.user == user and aux.password == password):
+                return True
+
+            else:
+                aux = aux.siguiente
+                if(aux == self.primero):
+                    return False
+
+
+
