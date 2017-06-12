@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 from Lista_Circular_Doble_Enlazada import ListaCircular
 lista = ListaCircular()
+from LeerArchivo import archivo
+archivo = archivo()
 from Cola import Cola
+from Matriz import matriz
+from Pila import pila
+pila = pila(500)
+matriz = matriz()
 cola = Cola()
 opcion = '1'
+verificar = False
 while (opcion != '3'):
     print ("----------Menu del Sistema----------")
     print ("1. Crear Usuario")
@@ -17,12 +24,12 @@ while (opcion != '3'):
         print("Ingrese una Contraseña")
         password = raw_input()
         if(lista.Vacio() == True):
-            lista.AgregarFinal(user, password)
+            lista.AgregarFinal(user, password, cola)
             print("Usuario Registrado")
         elif(lista.Buscar(user, password)== True):
             print("El Usuario Ya Está Registrado")
         else:
-            lista.AgregarFinal(user, password)
+            lista.AgregarFinal(user, password, cola)
             print("Usuario Registrado")
     elif (opcion == '2'):
         print("Ingrese su Usuario")
@@ -44,7 +51,8 @@ while (opcion != '3'):
                 teclado = raw_input()
                 if(teclado == '1'):
                     cola.LeerArchivo()
-                elif(teclado == '2'):
+                    verificar = True
+                elif(teclado == '2' and verificar == True):
                     scan = '1'
                     while(scan != '2'):
                         print ("----------Menu----------")
@@ -53,12 +61,13 @@ while (opcion != '3'):
                         scan = raw_input()
                         print("Ingrese una Opcion")
                         if(opcion == '1'):
-                            print("")
+                            pila.PPeek()
+                            #print ("%d" & (pila.EPeek()))
                         elif(opcion == '2'):
                             print("Regresando al Menu Principal")
                         else:
                             print("!Opcion Incorrecta")
-                elif(teclado == '3'):
+                elif(teclado == '3' and verificar == True):
                     leer = '1'
                     while(leer != '5'):
                         print ("----------Menu----------")
@@ -70,7 +79,7 @@ while (opcion != '3'):
                         print("Ingrese una Opcion")
                         leer = raw_input()
                         if(leer == '1'):
-                            print("")
+                            print ("")
                         elif(leer == '2'):
                             print("")
                         elif(leer == '3'):
@@ -87,12 +96,13 @@ while (opcion != '3'):
                     print("\n")
                     print("Recorriendo Lista por la Izquierda")
                     lista.recorrerFin_a_Inicio()
-                elif(teclado == '5'):
+                    print("\n")
+                elif(teclado == '5' and verificar == True):
                     cola.RecorrerCola()
                 elif(teclado == '6'):
                     print("Cerrando Sesion")
                 else:
-                    print("!Opcion Incorrecta")
+                    print("!Debe Leer Primero el Archivo de Texto")
         else:
             print("Usuario o Contraseña Incorrectos / Usuario no Registrado")
 
@@ -101,9 +111,6 @@ while (opcion != '3'):
         print("Saliendo del Programa")
     else:
         print("!Opcion Incorrecta")
-
-
-
 
 
 

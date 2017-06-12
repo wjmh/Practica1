@@ -2,38 +2,70 @@
 class pila():
 
     def __init__(self, size):
-        self.lista = []
+        self.EPila = []
+        self.PPila = []
         self.size = size
         self.top = 0
+
 
     def PilaVacia(self):
         if (self.top == 0):
             return True
-        else :
+        else:
             return False
 
-    def Push(self, operacion):
-        if(self.top < self.size):
-            self.lista += [operacion]
+    def EPush(self, operacion):
+        operadores = "+-*"
+        while (self.PilaVacia()):
+            if (self.EPeek() in operadores):
+                self.PPush(self.OperarPila(self.EPop(), self.PPop(), self.PPop()))
+            self.top += 1
+        else:
+            self.PPush(self.EPop())
+
+    def PPush(self, operacion):
+        while (self.PilaVacia()):
+            self.PPila += [operacion]
             self.top += 1
         else:
             print("La pila está llena")
 
-    def Pop(self):
+
+
+    def EPop(self):
         if(self.PilaVacia()):
             print("La pila está Vacía")
         else:
             self.top -= 1
-            self.lista = [self.lista[x] for x in range(self.top)]
+            self.E = [self.EPila[x] for x in range(self.top)]
+
+    def PPop(self):
+        if(self.PilaVacia()):
+            print("La pila está Vacía")
+        else:
+            self.top -= 1
+            self.E = [self.PPila[x] for x in range(self.top)]
 
     def MostrarPila(self):
         i = self.top -1
         while(i > -1):
-            print("[%d]  =>  %d" % (i, self.lista[i]))
+            print("[%d]  =>  %s" % (i, self.EPila[i]))
             i -= 1
 
     def SizePila(self):
         return self.top
 
-    def Peek(self):
-        return self.lista[-1]
+    def EPeek(self):
+        print self.EPila[-1]
+    def PPeek(self):
+        print self.PPila[-1]
+
+    def OperarPila(self, operador, x, y):
+        x = int(x)
+        y = int(y)
+        if (operador == '+'):
+            return (x + y)
+        if (operador == '-'):
+            return (x - y)
+        if (operador == '*'):
+            return (x * y)

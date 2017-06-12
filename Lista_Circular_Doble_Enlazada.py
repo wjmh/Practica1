@@ -13,11 +13,11 @@ class ListaCircular:
         else:
             return False
 
-    def AgregarInicio(self, user, password):
+    def AgregarInicio(self, user, password, cola):
         if (self.Vacio()):
             self.primero = self.ultimo = nodo()
         else:
-            aux = nodo(user, password)
+            aux = nodo(user, password, cola)
             aux.siguiente = self.primero
             self.primero.anterior = aux
             self.primero = aux
@@ -25,12 +25,12 @@ class ListaCircular:
 
 
 
-    def AgregarFinal(self, user, password):
+    def AgregarFinal(self, user, password, cola):
         if(self.Vacio()):
-            self.primero = self.ultimo = nodo(user, password)
+            self.primero = self.ultimo = nodo(user, password, cola)
         else:
             aux = self.ultimo
-            self.ultimo = aux.siguiente = nodo(user, password)
+            self.ultimo = aux.siguiente = nodo(user, password, cola)
             self.ultimo.anterior = aux
         self.__UnirNodos()
 
@@ -42,7 +42,7 @@ class ListaCircular:
     def recorrerInicia_a_Fin(self):
         aux = self.primero
         while (aux):
-            print (aux.user)
+            print (aux.user),
             aux = aux.siguiente
             if(aux == self.primero):
                 break
@@ -52,36 +52,10 @@ class ListaCircular:
     def recorrerFin_a_Inicio(self):
         aux = self.ultimo
         while (aux):
-            print (aux. user)
+            print (aux. user),
             aux = aux.anterior
             if(aux == self.ultimo):
                 break
-
-    def EliminarInicio(self):
-        if (self.Vacio()):
-            print("La lista está vacía.")
-
-        elif (self.primero == self.ultimo):
-            self.primero = self.ultimo = None
-
-        else:
-            self.primero = self.primero.siguiente
-
-        self.__UnirNodos()
-
-
-
-    def EliminarUltimo(self):
-        if (self.Vacio()):
-            print("La lista está vacía.")
-
-        elif (self.primero == self.ultimo):
-            self.primero = self.ultimo = None
-
-        else:
-            self.ultimo = self.ultimo.anterior
-
-        self.__UnirNodos()
 
 
     def Buscar(self, user, password):
